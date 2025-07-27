@@ -20,6 +20,6 @@ fi
 
 
 # 构建指定目标
-cmake --build . --target $TARGET
+cmake --build . --target $TARGET ${TARGET}-opt
 # 安装构建的目标
 ninja install
