@@ -33,9 +33,11 @@ def SirenDialect : Dialect {
   // // If this dialect overrides the hook for materializing constants.
   // bit hasConstantMaterializer = 0;
 
-  // /// If the dialect definition provides a non-default destructor.
-  // /// If false, a default destructor implementation will be generated.
-  // bit hasNonDefaultDestructor = 0;
+  /// If the dialect definition provides a non-default destructor.
+  /// If false, a default destructor implementation will be generated.
+  // 为1时则没有默认析构函数，需要用户提供析构函数实现
+  // 如果为0，则会生成一个默认的析构函数实现。
+  let hasNonDefaultDestructor = 1;
 
   // // If this dialect overrides the hook for verifying operation attributes.
   // bit hasOperationAttrVerify = 0;
