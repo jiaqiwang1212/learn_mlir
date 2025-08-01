@@ -3,6 +3,10 @@ set -e
 
 TARGET="$1"  # 接收目标作为命令行参数
 
+if [ -z $TARGET ]; then
+    echo "Error: No target specified."
+    exit 1
+fi
 
 cd build
 
@@ -12,11 +16,10 @@ cmake -G $BUILD_SYSTEM .. \
     -DMLIR_DIR=$MLIR_DIR \
     -DCMAKE_BUILD_TYPE=Debug \
     -DCMAKE_INSTALL_PREFIX=$INSTALL_PATH \
+    -DTARGET=$TARGET \
 
-if [ -z $TARGET ]; then
-    echo "Error: No target specified."
-    exit 1
-fi
+
+
 
 
 # 构建指定目标

@@ -37,9 +37,14 @@ include_directories(${MLIR_INCLUDE_DIRS})
 
 
 # Link against LLVM librarie
+if(${TARGET} STREQUAL "ch-2")
+    add_subdirectory(2-define_dialect)
+elseif(${TARGET} STREQUAL "ch-3")
+    add_subdirectory(3-define_op)
+endif()
+# add_subdirectory(llvm)
 
-add_subdirectory(llvm)
-add_subdirectory(2-define_dialect)
-add_subdirectory(3-define_op)
+
+# add_subdirectory(3-define_op)
 # add_subdirectory(4-define_type)
 # add_subdirectory(5-define_attribute)
