@@ -111,14 +111,19 @@ def AddOp: Op<SirenDialect, "add", []> {
 
   // Additional code that will be added to the public part of the generated
   // C++ code of the op declaration.
+  // 这个是生成在.h文件中的代码
   let extraClassDeclaration = [{
     void printOpName();
+    void printInfo();
   }];
 
-  // // Additional code that will be added to the generated source file. The
-  // // generated code is placed inside the op's C++ namespace. `$cppClass` is
-  // // replaced by the op's C++ class name.
-  // code extraClassDefinition = ?;
+  // Additional code that will be added to the generated source file. The
+  // generated code is placed inside the op's C++ namespace. `$cppClass` is
+  // replaced by the op's C++ class name.
+  // 这个是生成在.cpp文件中的代码
+  let extraClassDefinition = [{
+    void $cppClass::printInfo(){llvm::outs() << "Siren AddOp\n";}
+  }];
 }
 
 
