@@ -2,6 +2,7 @@
 #define NPU_MLIR_SIREN_OPS_TD
 
 include "mlir/IR/OpBase.td"
+include "mlir/IR/BuiltinAttributes.td"
 include "npu-mlir/Dialect/Siren/IR/SirenDialect.td"
 
 def AddOp: Op<SirenDialect, "add", []> {
@@ -15,8 +16,8 @@ def AddOp: Op<SirenDialect, "add", []> {
   // // Optional. The group of ops this op is part of.
   // OpDocGroup opDocGroup = ?;
 
-  // // Dag containing the arguments of the op. Default to 0 arguments.
-  // dag arguments = (ins);
+  // Dag containing the arguments of the op. Default to 0 arguments.
+  dag arguments = (ins StrAttr:$name);
 
   // // The list of results of the op. Default to 0 results.
   // dag results = (outs);

@@ -21,10 +21,10 @@ def SirenDialect : Dialect {
   // A list of key/value pair representing an attribute type and a name.
   // This will generate helper classes on the dialect to be able to
   // manage discardable attributes on operations in a type safe way.
-  // dag discardableAttrs = (ins);
-  // let discardableAttrs = (ins
-  //   "StringAttr":$debug_level     // 源文件信息
-  // );
+  // 这是一个可丢弃attribute的列表
+  let discardableAttrs = (ins
+    "StringAttr":$debug_level     // 源文件信息
+  );
 
 
   // An optional code block containing extra declarations to place in the
@@ -42,8 +42,11 @@ def SirenDialect : Dialect {
   // 如果为0，则会生成一个默认的析构函数实现。
   let hasNonDefaultDestructor = 1;
 
-  // // If this dialect overrides the hook for verifying operation attributes.
-  // let hasOperationAttrVerify = 0;
+  // If this dialect overrides the hook for verifying operation attributes.
+  // 这个只用来验证discardable attribute的hook
+  // 不会验证其它的attributes
+  // 和上面的discardableAttrs有关
+  let hasOperationAttrVerify = 1;
 
   // // If this dialect overrides the hook for verifying region argument
   // // attributes.

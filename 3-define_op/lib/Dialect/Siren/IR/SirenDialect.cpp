@@ -18,4 +18,24 @@ void SirenDialect::initialize() {
 void SirenDialect::print_name() { llvm::outs() << "SirenDialect\n"; }
 
 SirenDialect::~SirenDialect() = default;
+
+mlir::LogicalResult
+SirenDialect::verifyOperationAttribute(::mlir::Operation *op,
+                                       ::mlir::NamedAttribute attribute) {
+  // 在这里可以添加对discardable attribute的验证逻辑
+  llvm::outs() << "discardable attribute verify\n";
+  if (attribute.getName() == "siren.debug_level") {
+    auto debugLevelAttr =
+        mlir::dyn_cast<mlir::StringAttr>(attribute.getValue());
+    if (!debugLevelAttr) {
+      op->emitError("debug_level must be a StringAttr");
+      return mlir::failure();
+    }
+    llvm::outs() << "siren.debug_level: " << debugLevelAttr.getValue() << "\n";
+  } else {
+    op->emitError("Unknown attribute: ") << attribute.getName();
+    return mlir::failure();
+  }
+  return mlir::success();
+}
 } // namespace mlir::npu_mlir
