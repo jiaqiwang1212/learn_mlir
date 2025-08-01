@@ -24,9 +24,11 @@ def SirenDialect : Dialect {
   // dag discardableAttrs = (ins);
 
 
-  // // An optional code block containing extra declarations to place in the
-  // // dialect declaration.
-  // code extraClassDeclaration = "";
+  // An optional code block containing extra declarations to place in the
+  // dialect declaration.
+  let extraClassDeclaration = [{
+    void print_name();
+  }];
 
   // // If this dialect overrides the hook for materializing constants.
   // bit hasConstantMaterializer = 0;

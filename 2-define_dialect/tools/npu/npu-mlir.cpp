@@ -17,5 +17,6 @@ int main() {
     llvm::outs() << "SirenDialect loaded successfully\n";
     llvm::outs() << "Namespace: " << siren->getNamespace() << "\n";
   }
+  siren->print_name(); // 调用自定义的打印函数
   return 0;
 }

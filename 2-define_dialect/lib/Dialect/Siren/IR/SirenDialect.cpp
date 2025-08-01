@@ -7,4 +7,6 @@ namespace mlir::npu_mlir {
 void SirenDialect::initialize() {
   llvm::outs() << "SirenDialect initialized\n";
 }
+
+void SirenDialect::print_name() { llvm::outs() << "SirenDialect\n"; }
 } // namespace mlir::npu_mlir
