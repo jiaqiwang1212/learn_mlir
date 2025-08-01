@@ -9,4 +9,6 @@ add_mlir_dialect_library(NPUMLIRSirenDialect
 
   LINK_LIBS PUBLIC
   MLIRIR
+  MLIRFuncDialect
+  MLIRArithDialect
 )
