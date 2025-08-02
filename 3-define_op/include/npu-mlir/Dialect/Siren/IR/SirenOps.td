@@ -94,9 +94,11 @@ def AddOp: Op<SirenDialect, "add", []> {
   // // Whether this op has associated canonicalization patterns.
   // bit hasCanonicalizer = 0;
 
-  // // Whether this op has a static "canonicalize" method to perform "match and
-  // // rewrite patterns".
-  // bit hasCanonicalizeMethod = 0;
+  // Whether this op has a static "canonicalize" method to perform "match and
+  // rewrite patterns".
+  // 这个和上面的hasCanonicalizer不同, 这个是指是否有一个静态的canonicalize方法
+  // 如果这个设置为1， 则会生成一个静态的canonicalize方法， 也就是只有这一种pattern
+  let hasCanonicalizeMethod = 1;
 
   // // Whether this op has a folder.
   // bit hasFolder = 0;

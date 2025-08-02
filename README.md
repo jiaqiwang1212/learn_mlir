@@ -7,3 +7,4 @@ prequests: llvm-20.0.1
 |01-搭建mlir工程| ✅ |
 |02-创建一个dialect|✅|
 |03-添加一个op|✅|
+|04-FileCheck的使用||

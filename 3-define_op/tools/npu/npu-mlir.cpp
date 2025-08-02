@@ -1,6 +1,8 @@
 #include "mlir/IR/Builders.h"
 #include "mlir/IR/MLIRContext.h"
 #include "mlir/IR/Verifier.h"
+#include "mlir/Pass/PassManager.h"
+#include "mlir/Transforms/Passes.h"
 #include "npu-mlir/Dialect/Siren/IR/SirenDialect.h"
 #include "llvm/Support/raw_ostream.h"
 
@@ -15,26 +17,22 @@ int main() {
 
   auto loc = builder.getUnknownLoc();
 
+  // 创建一个Module
+  auto module = builder.create<mlir::ModuleOp>(loc);
+
+  // 设置insert point到Module
+  builder.setInsertionPointToStart(module.getBody());
+
   auto addOp = builder.create<mlir::npu_mlir::AddOp>(
       loc, builder.getStringAttr("addOp"));
 
-  auto helper = siren->getDebugLevelAttrHelper();
+  module->dump();
 
-  // 给op添加discardable attr
-  if (helper.isAttrPresent(addOp)) {
-    llvm::errs() << "addOp has debug_level attribute\n";
-  } else {
-    helper.setAttr(addOp, builder.getStringAttr("info"));
-  }
+  // 添加规范化pass
+  mlir::PassManager pm(&context);
+  pm.addPass(mlir::createCanonicalizerPass());
 
-  // 1. dump时会verify
-  addOp->dump();
+  llvm::LogicalResult result = pm.run(module);
 
-  // 2. verify时会检查discardable attr
-  if (mlir::failed(mlir::verify(addOp))) {
-    llvm::errs() << "addOp verification failed\n";
-  } else {
-    llvm::outs() << "addOp verification succeeded\n";
-  }
   return 0;
 }
