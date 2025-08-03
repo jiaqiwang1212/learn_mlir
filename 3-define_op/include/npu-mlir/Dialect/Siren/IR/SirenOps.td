@@ -7,11 +7,11 @@ include "npu-mlir/Dialect/Siren/IR/SirenDialect.td"
 
 def AddOp: Op<SirenDialect, "add", []> {
   
-  // // One-line human-readable description of what the op does.
-  // string summary = "";
+  // One-line human-readable description of what the op does.
+  let summary = "Add two values.";
 
-  // // Additional, longer human-readable description of what the op does.
-  // string description = "";
+  // Additional, longer human-readable description of what the op does.
+  let description = "This AddOp for me to test some function of op table gen.";                                                                                                                                                                                                                                      
 
   // // Optional. The group of ops this op is part of.
   // OpDocGroup opDocGroup = ?;

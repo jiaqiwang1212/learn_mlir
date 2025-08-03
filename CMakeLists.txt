@@ -13,6 +13,9 @@ find_package(LLVM REQUIRED CONFIG)
 set(MLIR_DIR /data1/wangjiaqi/workspace/llvm_essentials/externals/llvm-project/build/lib/cmake/mlir)
 find_package(MLIR REQUIRED CONFIG)
 
+# For document
+set(MLIR_BINARY_DIR ${CMAKE_INSTALL_PREFIX})
+
 message(STATUS "Using LLVMConfig.cmake in: ${LLVM_DIR}")
 message(STATUS "Using MLIRConfig.cmake in: ${MLIR_DIR}")
 

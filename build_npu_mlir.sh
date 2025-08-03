@@ -23,6 +23,6 @@ cmake -G $BUILD_SYSTEM .. \
 
 
 # 构建指定目标
-cmake --build . --target $TARGET ${TARGET}-opt
+cmake --build . --target $TARGET ${TARGET}-opt mlir-doc
 # 安装构建的目标
 ninja install

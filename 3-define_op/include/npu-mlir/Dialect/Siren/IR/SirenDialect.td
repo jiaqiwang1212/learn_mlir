@@ -2,6 +2,7 @@
 #define NPU_MLIR_SIREN_DIALECT_TD
 
 include "mlir/IR/DialectBase.td"
+include "mlir/IR/OpBase.td"
 
 def SirenDialect : Dialect {
   // Dialect的名字
@@ -11,7 +12,7 @@ def SirenDialect : Dialect {
   let cppNamespace = "::mlir::npu_mlir";
 
   // Dialect 的简短描述  TODO 在哪里体现？
-  let description = "Siren dialect for NPU MLIR.";
+  let description = "Siren dialect for NPU MLIR. 为学习MLIR的使用而定义的一个dialect.";
   // A list of dialects this dialect will load on construction as dependencies.
   // These are dialects that this dialect may involve in canonicalization
   // pattern or interfaces.
