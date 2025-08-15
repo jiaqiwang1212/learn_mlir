@@ -4,8 +4,9 @@
 include "mlir/IR/OpBase.td"
 include "mlir/IR/BuiltinAttributes.td"
 include "npu-mlir/Dialect/Siren/IR/SirenDialect.td"
+include "mlir/Interfaces/SideEffectInterfaces.td"
 
-def AddOp: Op<SirenDialect, "add", []> {
+def AddOp: Op<SirenDialect, "add", [Pure]> {
   
   // One-line human-readable description of what the op does.
   let summary = "Add two values.";
@@ -126,6 +127,19 @@ def AddOp: Op<SirenDialect, "add", []> {
   let extraClassDefinition = [{
     void $cppClass::printInfo(){llvm::outs() << "Siren AddOp\n";}
   }];
+}
+
+def SubOp: Op<SirenDialect, "sub", []> {
+  
+  let summary = "Sub two values.";
+
+  let description = "This SubOp for me to test some function of op table gen.";                                                                                                                                                                                                                                      
+
+  dag arguments = (ins I8:$lhs, I8:$rhs);
+
+  dag results = (outs I8:$result);
+
+  let hasFolder = 1;
 }
 
 

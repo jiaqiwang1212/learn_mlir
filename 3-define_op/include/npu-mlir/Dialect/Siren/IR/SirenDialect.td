@@ -35,7 +35,7 @@ def SirenDialect : Dialect {
   }];
 
   // // If this dialect overrides the hook for materializing constants.
-  // bit hasConstantMaterializer = 0;
+  let hasConstantMaterializer = 1;
 
   /// If the dialect definition provides a non-default destructor.
   /// If false, a default destructor implementation will be generated.

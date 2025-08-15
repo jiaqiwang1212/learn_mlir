@@ -9,3 +9,4 @@ prequests: llvm-20.0.1
 |03-添加一个op|✅|
 |04-FileCheck的使用||
 |05-add_mlir_doc的使用|✅|
+|06-hasFolder的使用|✅|

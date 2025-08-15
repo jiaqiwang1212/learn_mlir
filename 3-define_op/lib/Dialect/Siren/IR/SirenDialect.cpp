@@ -38,4 +38,11 @@ SirenDialect::verifyOperationAttribute(::mlir::Operation *op,
   }
   return mlir::success();
 }
+
+Operation *SirenDialect::materializeConstant(OpBuilder &builder,
+                                             Attribute value, Type type,
+                                             Location loc) {
+  return builder.create<arith::ConstantOp>(loc, type,
+                                           mlir::cast<mlir::TypedAttr>(value));
+}
 } // namespace mlir::npu_mlir
