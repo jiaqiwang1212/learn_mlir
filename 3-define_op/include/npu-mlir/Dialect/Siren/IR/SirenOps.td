@@ -6,7 +6,7 @@ include "mlir/IR/BuiltinAttributes.td"
 include "npu-mlir/Dialect/Siren/IR/SirenDialect.td"
 include "mlir/Interfaces/SideEffectInterfaces.td"
 
-def AddOp: Op<SirenDialect, "add", [Pure]> {
+def AddOp: Op<SirenDialect, "add", []> {
   
   // One-line human-readable description of what the op does.
   let summary = "Add two values.";
@@ -18,10 +18,10 @@ def AddOp: Op<SirenDialect, "add", [Pure]> {
   // OpDocGroup opDocGroup = ?;
 
   // Dag containing the arguments of the op. Default to 0 arguments.
-  dag arguments = (ins StrAttr:$name);
+  dag arguments = (ins I8:$lhs, I8:$rhs);
 
   // // The list of results of the op. Default to 0 results.
-  // dag results = (outs);
+  dag results = (outs I8:$result);
 
   // // The list of regions of the op. Default to 0 regions.
   // dag regions = (region);
@@ -74,14 +74,16 @@ def AddOp: Op<SirenDialect, "add", [Pure]> {
   // ///   * void print(OpAsmPrinter &p)
   // bit hasCustomAssemblyFormat = 0;
 
-  // // A bit indicating if the operation has additional invariants that need to
-  // // verified (aside from those verified by other ODS constructs). If set to `1`,
-  // // an additional `LogicalResult verify()` declaration will be generated on the
-  // // operation class. The operation should implement this method and verify the
-  // // additional necessary invariants. This verifier shouldn't access any nested
-  // // operations because those operations may be ill-formed. Use the
-  // // `hasRegionVerifier` below instead.
-  // bit hasVerifier = 0;
+  // A bit indicating if the operation has additional invariants that need to
+  // verified (aside from those verified by other ODS constructs). If set to `1`,
+  // an additional `LogicalResult verify()` declaration will be generated on the
+  // operation class. The operation should implement this method and verify the
+  // additional necessary invariants. This verifier shouldn't access any nested
+  // operations because those operations may be ill-formed. Use the
+  // `hasRegionVerifier` below instead.
+  // 对没有region的op来说，可以使用这个filed来对op进行verify
+  // 对有region的op来说，应该使用hasRegionVerifier来对region进行verify
+  let hasVerifier = 1;
 
   // // A bit indicating if the operation has additional invariants that need to
   // // verified and which associate with regions (aside from those verified by the

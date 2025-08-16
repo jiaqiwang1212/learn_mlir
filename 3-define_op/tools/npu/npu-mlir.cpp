@@ -23,13 +23,13 @@ int main() {
   // 设置insert point到Module
   builder.setInsertionPointToStart(module.getBody());
 
-  auto addOp = builder.create<mlir::npu_mlir::AddOp>(
-      loc, builder.getStringAttr("addOp"));
-
   auto lhs = builder.create<mlir::arith::ConstantIntOp>(loc, 1, 8);
   auto rhs = builder.create<mlir::arith::ConstantIntOp>(loc, 2, 8);
 
   auto subOp = builder.create<mlir::npu_mlir::SubOp>(
+      loc, builder.getIntegerType(8), lhs, rhs);
+
+  auto addOp = builder.create<mlir::npu_mlir::AddOp>(
       loc, builder.getIntegerType(8), lhs, rhs);
 
   llvm::DebugFlag = true;

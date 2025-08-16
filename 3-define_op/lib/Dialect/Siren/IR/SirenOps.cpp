@@ -11,6 +11,11 @@ llvm::LogicalResult AddOp::canonicalize(AddOp op,
   return llvm::failure();
 }
 
+llvm::LogicalResult AddOp::verify() {
+  // 在这里可以添加验证逻辑
+  return llvm::success();
+}
+
 mlir::OpFoldResult SubOp::fold(FoldAdaptor adaptor) {
   // 在这里可以添加折叠逻辑
   llvm::outs() << "Folding siren.sub operation\n"; //
@@ -35,4 +40,5 @@ mlir::OpFoldResult SubOp::fold(FoldAdaptor adaptor) {
   // 获取的是操作的结果类型，确保新常量的类型正确
   return IntegerAttr::get(getType(), sum);
 }
+
 } // namespace mlir::npu_mlir
