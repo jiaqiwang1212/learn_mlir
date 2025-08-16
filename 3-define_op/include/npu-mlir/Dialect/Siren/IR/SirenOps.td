@@ -55,11 +55,13 @@ def AddOp: Op<SirenDialect, "add", []> {
   //                   ValueRange operands,
   //                   ArrayRef<NamedAttribute> attributes);
   // ```
-  // list<OpBuilder> builders = ?;
+  let builders = [
+    OpBuilder<(ins "Value":$lhs, "Value":$rhs)>
+  ];
 
-  // // Avoid generating default build functions.  Custom builders must be
-  // // provided.
-  // bit skipDefaultBuilders = 0;
+  // Avoid generating default build functions.  Custom builders must be
+  // provided.
+  let skipDefaultBuilders = 1;
 
   // // Custom assembly format.
   // /// This field corresponds to a declarative description of the assembly format

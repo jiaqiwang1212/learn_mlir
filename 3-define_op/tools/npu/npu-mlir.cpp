@@ -29,8 +29,7 @@ int main() {
   auto subOp = builder.create<mlir::npu_mlir::SubOp>(
       loc, builder.getIntegerType(8), lhs, rhs);
 
-  auto addOp = builder.create<mlir::npu_mlir::AddOp>(
-      loc, builder.getIntegerType(8), lhs, rhs);
+  auto addOp = builder.create<mlir::npu_mlir::AddOp>(loc, lhs, rhs);
 
   llvm::DebugFlag = true;
   if (failed(mlir::verify(module))) {

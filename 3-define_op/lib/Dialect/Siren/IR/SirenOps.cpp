@@ -15,7 +15,11 @@ llvm::LogicalResult AddOp::verify() {
   // 在这里可以添加验证逻辑
   return llvm::success();
 }
-
+void AddOp::build(::mlir::OpBuilder &odsBuilder,
+                  ::mlir::OperationState &odsState, Value lhs, Value rhs) {
+  odsState.addOperands({lhs, rhs});
+  odsState.addTypes(lhs.getType());
+}
 mlir::OpFoldResult SubOp::fold(FoldAdaptor adaptor) {
   // 在这里可以添加折叠逻辑
   llvm::outs() << "Folding siren.sub operation\n"; //
