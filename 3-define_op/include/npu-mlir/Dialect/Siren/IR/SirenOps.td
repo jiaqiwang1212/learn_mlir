@@ -14,7 +14,8 @@ def AddOp: Op<SirenDialect, "add", []> {
   // Additional, longer human-readable description of what the op does.
   let description = "This AddOp for me to test some function of op table gen.";                                                                                                                                                                                                                                      
 
-  // // Optional. The group of ops this op is part of.
+  // Optional. The group of ops this op is part of.
+  // 与生成的文档相关，这个不用关心
   // OpDocGroup opDocGroup = ?;
 
   // Dag containing the arguments of the op. Default to 0 arguments.
