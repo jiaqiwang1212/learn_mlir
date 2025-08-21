@@ -44,6 +44,8 @@ if(${TARGET} STREQUAL "ch-2")
     add_subdirectory(2-define_dialect)
 elseif(${TARGET} STREQUAL "ch-3")
     add_subdirectory(3-define_op)
+elseif(${TARGET} STREQUAL "ch-4")
+    add_subdirectory(4-define_Interfaces)
 endif()
 # add_subdirectory(llvm)
 
