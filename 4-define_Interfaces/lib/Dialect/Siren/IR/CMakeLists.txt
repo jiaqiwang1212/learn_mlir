@@ -11,4 +11,5 @@ add_mlir_dialect_library(NPUMLIRSirenDialect
   MLIRIR
   MLIRFuncDialect
   MLIRArithDialect
+  MLIRNpuOpInterface
 )

@@ -1,0 +1,5 @@
+set(LLVM_TARGET_DEFINITIONS NpuOpInterface.td)
+mlir_tablegen(NpuOpInterface.h.inc -gen-op-interface-decls)
+mlir_tablegen(NpuOpInterface.cpp.inc -gen-op-interface-defs)
+add_public_tablegen_target(MLIRNpuOpInterfaceIncGen)
+add_dependencies(mlir-generic-headers MLIRNpuOpInterfaceIncGen)

@@ -20,6 +20,12 @@ void AddOp::build(::mlir::OpBuilder &odsBuilder,
   odsState.addOperands({lhs, rhs});
   odsState.addTypes(lhs.getType());
 }
+
+int32_t AddOp::get_num_operands_1() { return getNumOperands(); }
+
+// 覆盖在OpInterface中的默认实现
+int32_t AddOp::get_num_operands_2() { return 5; }
+
 mlir::OpFoldResult SubOp::fold(FoldAdaptor adaptor) {
   // 在这里可以添加折叠逻辑
   llvm::outs() << "Folding siren.sub operation\n"; //

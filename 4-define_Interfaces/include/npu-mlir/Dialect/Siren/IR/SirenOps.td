@@ -5,8 +5,11 @@ include "mlir/IR/OpBase.td"
 include "mlir/IR/BuiltinAttributes.td"
 include "npu-mlir/Dialect/Siren/IR/SirenDialect.td"
 include "mlir/Interfaces/SideEffectInterfaces.td"
+include "npu-mlir/Interfaces/NpuOpInterface.td"
 
-def AddOp: Op<SirenDialect, "add", []> {
+// 重新实现 OpInterface 中的 get_num_operands_2 方法
+def AddOp: Op<SirenDialect, "add", [DeclareOpInterfaceMethods<NpuOpInterface,
+        ["get_num_operands_2"]>]> {
   
   // One-line human-readable description of what the op does.
   let summary = "Add two values.";

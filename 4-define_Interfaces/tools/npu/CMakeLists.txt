@@ -8,7 +8,7 @@
 # )
 add_llvm_executable(ch-4 npu-mlir.cpp)
 # target_link_libraries(ch-2 PRIVATE ${libs})
-target_link_libraries(ch-4 PRIVATE NPUMLIRSirenDialect MLIRTransforms)
+target_link_libraries(ch-4 PRIVATE NPUMLIRSirenDialect MLIRTransforms MLIRNpuOpInterface)
 
 install(TARGETS ch-4
   RUNTIME DESTINATION bin
