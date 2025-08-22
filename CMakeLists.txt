@@ -46,6 +46,8 @@ elseif(${TARGET} STREQUAL "ch-3")
     add_subdirectory(3-define_op)
 elseif(${TARGET} STREQUAL "ch-4")
     add_subdirectory(4-define_Interfaces)
+elseif(${TARGET} STREQUAL "ch-5")
+    add_subdirectory(5-define_Traits)
 endif()
 # add_subdirectory(llvm)
 
