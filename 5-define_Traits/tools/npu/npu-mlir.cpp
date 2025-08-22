@@ -30,15 +30,6 @@ int main() {
   auto subOp = builder.create<mlir::npu_mlir::SubOp>(
       loc, builder.getIntegerType(8), lhs, rhs);
 
-  auto addOp = builder.create<mlir::npu_mlir::AddOp>(loc, lhs, rhs);
-
-  if (auto op = llvm::dyn_cast<mlir::npu_mlir::NpuOpInterface>(
-          addOp.getOperation())) {
-    llvm::outs() << op.get_num_operands_1() << "\n"; // 调用接口方法
-    llvm::outs() << op.get_num_operands_2() << "\n"; // 调用覆盖方法
-    llvm::outs() << op.get_num_operands_3() << "\n"; // 调用接口方法
-  }
-
   if (failed(mlir::verify(module))) {
     llvm::errs() << "Module verification failed\n";
     return 1;

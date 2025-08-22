@@ -3,6 +3,7 @@
 
 #include "npu-mlir/Dialect/Siren/IR/SirenDialect.h"
 #include "npu-mlir/Interfaces/NpuOpInterface.h"
+#include "npu-mlir/Traits/RequireTwoOperandsOneResult.h"
 #define GET_OP_CLASSES
 #include "npu-mlir/Dialect/Siren/IR/SirenOps.h.inc"
 

@@ -6,6 +6,7 @@ include "mlir/IR/BuiltinAttributes.td"
 include "npu-mlir/Dialect/Siren/IR/SirenDialect.td"
 include "mlir/Interfaces/SideEffectInterfaces.td"
 include "npu-mlir/Interfaces/NpuOpInterface.td"
+include "npu-mlir/Traits/NpuOpTraits.td"
 
 // 重新实现 OpInterface 中的 get_num_operands_2 方法
 def AddOp: Op<SirenDialect, "add", [DeclareOpInterfaceMethods<NpuOpInterface,
@@ -137,7 +138,7 @@ def AddOp: Op<SirenDialect, "add", [DeclareOpInterfaceMethods<NpuOpInterface,
   }];
 }
 
-def SubOp: Op<SirenDialect, "sub", []> {
+def SubOp: Op<SirenDialect, "sub", [RequireTwoOperandsOneResultOpTrait]> {
   
   let summary = "Sub two values.";
 
