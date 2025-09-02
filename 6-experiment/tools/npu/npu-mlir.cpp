@@ -1,3 +1,4 @@
+#include "mlir/Analysis/Liveness.h"
 #include "mlir/IR/Builders.h"
 #include "mlir/IR/MLIRContext.h"
 #include "mlir/IR/Verifier.h"
@@ -9,6 +10,28 @@
 #include "npu-mlir/Dialect/Siren/IR/SirenDialect.h"
 #include "llvm/Support/SourceMgr.h"
 #include "llvm/Support/raw_ostream.h"
+
+void test_liveness(mlir::ModuleOp module) {
+  mlir::Liveness liveness(module);
+  // 遍历整个module
+  mlir::SmallVector<mlir::Value> res_values;
+  int64_t num_ops = 0;
+  module->walk([&](mlir::Operation *op) {
+    // 对每个操作进行处理
+    llvm::outs() << "Results:\n";
+    for (auto result : op->getResults()) {
+      res_values.push_back(result);
+      llvm::outs() << liveness.isDeadAfter(result, op) << "\n";
+    }
+    llvm::outs() << "Operands:\n";
+    for (auto operand : op->getOperands()) {
+      llvm::outs() << liveness.isDeadAfter(operand, op) << "\n";
+    }
+    op->dumpPretty();
+    num_ops++;
+  });
+  llvm::outs() << "Total operations: " << num_ops << "\n";
+}
 
 int main() {
   // 创建一个MLIR上下文
@@ -40,6 +63,7 @@ int main() {
     llvm::errs() << "Error parsing MLIR file\n";
     return 1;
   }
-  module->dump();
+  // module->dump();
+  test_liveness(*module);
   return 0;
 }
