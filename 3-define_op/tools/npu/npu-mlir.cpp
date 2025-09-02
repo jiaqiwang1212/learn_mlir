@@ -26,31 +26,14 @@ int main() {
   auto lhs = builder.create<mlir::arith::ConstantIntOp>(loc, 1, 8);
   auto rhs = builder.create<mlir::arith::ConstantIntOp>(loc, 2, 8);
 
-  auto subOp = builder.create<mlir::npu_mlir::SubOp>(
+  auto mulOp = builder.create<mlir::npu_mlir::MulOp>(
       loc, builder.getIntegerType(8), lhs, rhs);
 
-  auto addOp = builder.create<mlir::npu_mlir::AddOp>(loc, lhs, rhs);
+  auto divOp = builder.create<mlir::npu_mlir::DivOp>(
+      loc, builder.getIntegerType(8), mlir::ValueRange{lhs, rhs});
 
-  llvm::DebugFlag = true;
   if (failed(mlir::verify(module))) {
     llvm::errs() << "Module verification failed\n";
-    return 1;
-  } else {
-    module->dump();
-  }
-
-  // 添加规范化pass
-  mlir::PassManager pm(&context);
-  pm.addPass(mlir::createCanonicalizerPass());
-
-  llvm::LogicalResult result = pm.run(module);
-
-  if (mlir::failed(result)) {
-    llvm::errs() << "Failed to run pass manager\n";
-    return 1;
-  }
-  if (failed(mlir::verify(module))) {
-    llvm::errs() << "Module verification failed after passes\n";
     return 1;
   } else {
     module->dump();

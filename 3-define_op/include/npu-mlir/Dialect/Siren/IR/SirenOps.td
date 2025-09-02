@@ -5,6 +5,7 @@ include "mlir/IR/OpBase.td"
 include "mlir/IR/BuiltinAttributes.td"
 include "npu-mlir/Dialect/Siren/IR/SirenDialect.td"
 include "mlir/Interfaces/SideEffectInterfaces.td"
+include "mlir/IR/CommonAttrConstraints.td"
 
 def AddOp: Op<SirenDialect, "add", []> {
   
@@ -140,12 +141,33 @@ def SubOp: Op<SirenDialect, "sub", []> {
 
   let description = "This SubOp for me to test some function of op table gen.";                                                                                                                                                                                                                                      
 
-  dag arguments = (ins I8:$lhs, I8:$rhs);
+  dag arguments = (ins I8:$lhs, I8:$rhs, DefaultValuedOptionalAttr<I32Attr, "5">:$level);
 
   dag results = (outs I8:$result);
 
   let hasFolder = 1;
 }
 
+def MulOp: Op<SirenDialect, "mul", []> {
+  
+  let summary = "Mul two values.";
+
+  let description = "This Mul for me to test some function of op table gen.";                                                                                                                                                                                                                                      
+
+  dag arguments = (ins I8:$lhs, I8:$rhs, DefaultValuedOptionalAttr<I32Attr, "5">:$level);
+
+  dag results = (outs I8:$result);
+}
+
+def DivOp: Op<SirenDialect, "div", []> {
+  
+  let summary = "Div two values.";
+
+  let description = "This Div for me to test some function of op table gen.";                                                                                                                                                                                                                                      
+
+  dag arguments = (ins I8:$lhs, I8:$rhs, OptionalAttr<I32Attr>:$level);
+
+  dag results = (outs I8:$result);
+}
 
 #endif // NPU_MLIR_SIREN_Op_TD
