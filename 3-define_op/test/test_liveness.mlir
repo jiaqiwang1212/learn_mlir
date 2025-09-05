@@ -23,3 +23,5 @@ module @TestModule {
 }
 
 // mlir-opt --test-print-liveness test_liveness.mlir
+
+// /data1/wangjiaqi/workspace/llvm_essentials/externals/llvm-project/build/bin/mlir-opt --view-op-graph /data1/wangjiaqi/workspace/llvm_essentials/3-define_op/test/test_liveness.mlir &> test.dot
