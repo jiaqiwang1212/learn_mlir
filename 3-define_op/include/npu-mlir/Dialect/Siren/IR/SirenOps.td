@@ -177,9 +177,9 @@ def SqrtOp: Op<SirenDialect, "sqrt", []> {
 
   let description = "This Div for me to test some function of op table gen.";                                                                                                                                                                                                                                      
 
-  dag arguments = (ins SirenTensor:$lhs);
+  dag arguments = (ins S_Tensor:$lhs);
 
-  dag results = (outs SirenTensor:$result);
+  dag results = (outs S_Tensor:$result);
 }
 
 #endif // NPU_MLIR_SIREN_Op_TD

@@ -25,9 +25,14 @@ int main() {
   // 设置insert point到Module
   builder.setInsertionPointToStart(module.getBody());
 
+  // 测试当创建siren_tensor_type时，elementType的约束
+  // auto test_siren_tensor_type_err = mlir::npu_mlir::SirenTensorType::get(
+  //     &context, builder.getF64Type(), llvm::ArrayRef<int64_t>{1, 3, 224,
+  //     224});
+
   // 创建自已自定义类型
   auto siren_tensor_type = mlir::npu_mlir::SirenTensorType::get(
-      &context, builder.getF32Type(), llvm::ArrayRef<int64_t>{1, 3, 224, 224});
+      &context, builder.getF16Type(), llvm::ArrayRef<int64_t>{1, 3, 224, 224});
 
   // 添加一个func
   auto funcType =
