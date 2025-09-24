@@ -6,6 +6,7 @@ include "mlir/IR/BuiltinAttributes.td"
 include "npu-mlir/Dialect/Siren/IR/SirenDialect.td"
 include "mlir/Interfaces/SideEffectInterfaces.td"
 include "mlir/IR/CommonAttrConstraints.td"
+include "npu-mlir/Dialect/Siren/IR/SirenTypes.td"
 
 def AddOp: Op<SirenDialect, "add", []> {
   
@@ -168,6 +169,17 @@ def DivOp: Op<SirenDialect, "div", []> {
   dag arguments = (ins I8:$lhs, I8:$rhs, OptionalAttr<I32Attr>:$level);
 
   dag results = (outs I8:$result);
+}
+
+def SqrtOp: Op<SirenDialect, "sqrt", []> {
+  
+  let summary = "sqrt one values.";
+
+  let description = "This Div for me to test some function of op table gen.";                                                                                                                                                                                                                                      
+
+  dag arguments = (ins SirenTensor:$lhs);
+
+  dag results = (outs SirenTensor:$result);
 }
 
 #endif // NPU_MLIR_SIREN_Op_TD

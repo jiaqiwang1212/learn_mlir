@@ -69,7 +69,7 @@ def SirenDialect : Dialect {
   // // When set, ODS will generate declarations for the type parsing and printing
   // // hooks in the dialect and default implementations that dispatch to each
   // // individual type directly.
-  // bit useDefaultTypePrinterParser = 0;
+  let useDefaultTypePrinterParser = 1;
 
   // // If this dialect overrides the hook for canonicalization patterns.
   // bit hasCanonicalizer = 0;

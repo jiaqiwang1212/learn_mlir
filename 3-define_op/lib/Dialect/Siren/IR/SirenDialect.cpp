@@ -1,14 +1,27 @@
 #include "npu-mlir/Dialect/Siren/IR/SirenDialect.h"
+#include "mlir/IR/BuiltinTypes.h"
 #include "npu-mlir/Dialect/Siren/IR/SirenDialect.cpp.inc"
+#include "npu-mlir/Dialect/Siren/IR/SirenOps.h"
+#include "npu-mlir/Dialect/Siren/IR/SirenTypes.h"
+#include "llvm/ADT/TypeSwitch.h"
 #include "llvm/Support/raw_ostream.h"
 
 #define GET_OP_CLASSES
 #include "npu-mlir/Dialect/Siren/IR/SirenOps.cpp.inc"
 
+#define GET_TYPEDEF_CLASSES
+#include "npu-mlir/Dialect/Siren/IR/SirenTypes.cpp.inc"
+
 namespace mlir::npu_mlir {
 
 void SirenDialect::initialize() {
   llvm::outs() << "SirenDialect initialized\n";
+
+  addTypes<
+#define GET_TYPEDEF_LIST
+#include "npu-mlir/Dialect/Siren/IR/SirenTypes.cpp.inc"
+      >();
+
   addOperations<
 #define GET_OP_LIST
 #include "npu-mlir/Dialect/Siren/IR/SirenOps.cpp.inc"
