@@ -51,7 +51,7 @@ elseif(${TARGET} STREQUAL "ch-5")
 elseif(${TARGET} STREQUAL "ch-6")
     add_subdirectory(6-experiment)
 endif()
-# add_subdirectory(llvm)
+add_subdirectory(llvm)
 
 
 # add_subdirectory(3-define_op)
