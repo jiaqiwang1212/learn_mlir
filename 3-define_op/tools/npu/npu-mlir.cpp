@@ -34,6 +34,12 @@ int main() {
   auto siren_tensor_type = mlir::npu_mlir::SirenTensorType::get(
       &context, builder.getF16Type(), llvm::ArrayRef<int64_t>{1, 3, 224, 224});
 
+  // 测试TypeTrait, 这个是对于每个使用了MyTypeTrait的Type都会有这个方法
+  siren_tensor_type.printTypeTrait();
+
+  // 这个是每个使用了MyTypeTrait的Type都会有一份在自已的代码里
+  siren_tensor_type.incrementCounter();
+
   // 添加一个func
   auto funcType =
       builder.getFunctionType({siren_tensor_type}, {siren_tensor_type});

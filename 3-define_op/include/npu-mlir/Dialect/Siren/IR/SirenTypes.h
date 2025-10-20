@@ -2,6 +2,7 @@
 #define NPU_MLIR_SIREN_TYPES_H
 
 #include "mlir/IR/DialectImplementation.h"
+#include "npu-mlir/TypeTrait/TypeTraits.h"
 #include "llvm/ADT/TypeSwitch.h"
 
 #define GET_TYPEDEF_CLASSES

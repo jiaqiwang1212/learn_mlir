@@ -5,6 +5,7 @@ include "npu-mlir/Dialect/Siren/IR/SirenDialect.td"
 include "mlir/IR/AttrTypeBase.td"
 include "mlir/IR/CommonTypeConstraints.td"
 include "mlir/IR/BuiltinTypeInterfaces.td"
+include "npu-mlir/TypeTrait/NpuTypeTraits.td"
 
 // 使用这个可以在创建Siren_Type对elementType进行约束
 def UI4 : UI<4>;
@@ -12,7 +13,7 @@ def Siren_ElementType : AnyTypeOf<[F32, F16, UI16, UI8, SI8, SI16,UI4, SI32, SI6
 }
 
 // 定义一个新Type的基类
-class Siren_Type<string name, string typeMnemonic> : TypeDef<SirenDialect, name, []>{
+class Siren_Type<string name, string typeMnemonic> : TypeDef<SirenDialect, name, [MyTypeTrait]>{
     let summary = "Siren Type";
     let description = [{
         This is a base type for Siren dialect types.
