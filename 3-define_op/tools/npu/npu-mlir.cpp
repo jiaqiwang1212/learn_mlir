@@ -6,7 +6,6 @@
 #include "mlir/Transforms/Passes.h"
 #include "npu-mlir/Dialect/Siren/IR/SirenDialect.h"
 #include "npu-mlir/Dialect/Siren/IR/SirenOps.h"
-#include "npu-mlir/Dialect/Siren/IR/SirenTypes.h"
 #include "llvm/Support/raw_ostream.h"
 int main() {
   // 创建一个MLIR上下文
@@ -56,9 +55,12 @@ int main() {
   auto divOp = builder.create<mlir::npu_mlir::DivOp>(
       loc, builder.getIntegerType(8), mlir::ValueRange{lhs, rhs});
 
+  auto siren_attr = mlir::npu_mlir::CustomAttr::get(&context, "example");
   auto sqrtOp = builder.create<mlir::npu_mlir::SqrtOp>(
-      loc, siren_tensor_type, entryBlock.getArgument(0));
+      loc, siren_tensor_type, entryBlock.getArgument(0), siren_attr);
 
+  // 直接从string创建自定义属性
+  auto c = builder.create<mlir::npu_mlir::UseCustomOp>(loc, "world");
   builder.create<mlir::func::ReturnOp>(loc, sqrtOp.getResult());
 
   if (failed(mlir::verify(module))) {

@@ -1,5 +1,6 @@
 #include "npu-mlir/Dialect/Siren/IR/SirenDialect.h"
 #include "mlir/IR/BuiltinTypes.h"
+#include "npu-mlir/Dialect/Siren/IR/SirenAttrs.h"
 #include "npu-mlir/Dialect/Siren/IR/SirenDialect.cpp.inc"
 #include "npu-mlir/Dialect/Siren/IR/SirenOps.h"
 #include "npu-mlir/Dialect/Siren/IR/SirenTypes.h"
@@ -11,6 +12,9 @@
 
 #define GET_TYPEDEF_CLASSES
 #include "npu-mlir/Dialect/Siren/IR/SirenTypes.cpp.inc"
+
+#define GET_ATTRDEF_CLASSES
+#include "npu-mlir/Dialect/Siren/IR/SirenAttrs.cpp.inc"
 
 namespace mlir::npu_mlir {
 
@@ -25,6 +29,11 @@ void SirenDialect::initialize() {
   addOperations<
 #define GET_OP_LIST
 #include "npu-mlir/Dialect/Siren/IR/SirenOps.cpp.inc"
+      >();
+
+  addAttributes<
+#define GET_ATTRDEF_LIST
+#include "npu-mlir/Dialect/Siren/IR/SirenAttrs.cpp.inc"
       >();
 }
 

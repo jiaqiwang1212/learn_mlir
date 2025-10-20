@@ -63,7 +63,7 @@ def SirenDialect : Dialect {
   // // When set, ODS will generate declarations for the attribute parsing and
   // // printing hooks in the dialect and default implementations that dispatch to
   // // each individual attribute directly.
-  // bit useDefaultAttributePrinterParser = 0;
+  let useDefaultAttributePrinterParser = 1;
 
   // // If this dialect should use default generated type parser boilerplate:
   // // When set, ODS will generate declarations for the type parsing and printing
