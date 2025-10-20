@@ -1,13 +1,16 @@
 #include "mlir/IR/Builders.h"
+#include "mlir/IR/DialectInterface.h"
 #include "mlir/IR/MLIRContext.h"
 #include "mlir/IR/Verifier.h"
 #include "mlir/Pass/PassManager.h"
 #include "mlir/Transforms/Passes.h"
 #include "npu-mlir/Dialect/Siren/IR/SirenDialect.h"
+#include "npu-mlir/Interfaces/NpuDialectInterface.h"
 #include "npu-mlir/Interfaces/NpuOpInterface.h"
 #include "llvm/Support/raw_ostream.h"
 
-int main() {
+void test_op_interface() {
+  llvm::outs() << "Test NpuOpInterface\n";
   // 创建一个MLIR上下文
   mlir::MLIRContext context;
 
@@ -41,10 +44,39 @@ int main() {
 
   if (failed(mlir::verify(module))) {
     llvm::errs() << "Module verification failed\n";
-    return 1;
   } else {
     module->dump();
   }
+}
 
+void test_dialect_interface() {
+  llvm::outs() << "Test NpuDialectInterface\n";
+  // 创建一个MLIR上下文
+  mlir::MLIRContext context;
+
+  // 加载SirenDialect到上下文中
+  auto siren = context.getOrLoadDialect<mlir::npu_mlir::SirenDialect>();
+
+  // 1. 测试在SirenDialect上获取NpuDialectInterface接口实例
+  if (auto iface =
+          siren
+              ->getRegisteredInterface<mlir::npu_mlir::NpuDialectInterface>()) {
+    iface->printSomeInfo();
+  }
+
+  // 2. 获取该上下文中所有注册的NpuDialectInterface接口实例
+  mlir::DialectInterfaceCollection<mlir::npu_mlir::NpuDialectInterface> ifaces(
+      &context);
+
+  for (auto iface : ifaces) {
+    iface.printSomeInfo();
+    auto dialect = iface.getDialect();
+    llvm::outs() << "Dialect name: " << dialect->getNamespace() << "\n";
+  }
+}
+
+int main() {
+  // test_op_interface();
+  test_dialect_interface();
   return 0;
 }
