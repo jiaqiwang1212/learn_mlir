@@ -3,6 +3,13 @@ get_property(conversion_libs GLOBAL PROPERTY MLIR_CONVERSION_LIBS)
 get_property(extension_libs GLOBAL PROPERTY MLIR_EXTENSION_LIBS)
 get_property(translation_libs GLOBAL PROPERTY MLIR_TRANSLATION_LIBS)
 
+set(libs
+  MLIRSCFDialect
+  MLIRMemRefDialect
+  MLIRFuncDialect
+  MLIRArithDialect
+  ${conversion_libs}
+)
 
 # 定义一个列表来跟踪所有测试可执行文件
 set(TEST_EXECUTABLES)
@@ -11,7 +18,7 @@ set(TEST_EXECUTABLES)
 # PARTIAL_SOURCES_INTENDED 允许同一目录下有多个独立的可执行文件
 macro(add_test_executable name source)
   add_llvm_executable(${name} ${source} PARTIAL_SOURCES_INTENDED)
-  target_link_libraries(${name} PRIVATE MLIRTransforms)
+  target_link_libraries(${name} PRIVATE ${libs})
   install(TARGETS ${name} RUNTIME DESTINATION bin/test)
   list(APPEND TEST_EXECUTABLES ${name})
 endmacro()
