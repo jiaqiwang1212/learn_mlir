@@ -190,4 +190,11 @@ def Siren_UseCustomOp : Op<SirenDialect, "use_custom"> {
   );
 }
 
+def Siren_MyCustomOp : Op<SirenDialect, "my_custom"> {
+  let summary = "Use custom attr";
+  let arguments = (ins
+    TypedAttrInterface:$exterattr
+  );
+}
+
 #endif // NPU_MLIR_SIREN_Op_TD

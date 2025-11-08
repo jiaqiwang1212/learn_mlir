@@ -61,6 +61,12 @@ int main() {
 
   // 直接从string创建自定义属性
   auto c = builder.create<mlir::npu_mlir::UseCustomOp>(loc, "world");
+
+  // 创建external attr
+  auto externAttr =
+      mlir::npu_mlir::MyExternAttr::get(&context, builder.getI32Type());
+  auto mycustomop = builder.create<mlir::npu_mlir::MyCustomOp>(loc, externAttr);
+
   builder.create<mlir::func::ReturnOp>(loc, sqrtOp.getResult());
 
   if (failed(mlir::verify(module))) {

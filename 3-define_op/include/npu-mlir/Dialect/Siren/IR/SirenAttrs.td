@@ -3,6 +3,8 @@
 
 include "mlir/IR/AttrTypeBase.td"
 include "npu-mlir/Dialect/Siren/IR/SirenDialect.td"
+include "mlir/IR/BuiltinAttributeInterfaces.td"
+
 
 class SirenAttr<string name, string typeMnemonic> : AttrDef<SirenDialect, name, []> {
   let mnemonic = typeMnemonic;  // 在.mlir 文件中使用的助记符
@@ -42,6 +44,12 @@ def SirenCustomAttrC : Attr<
   // 关键：教 ODS 怎样把“裸值”包成你的属性
   let constBuilderCall =
     "::mlir::npu_mlir::CustomAttr::get($_builder.getContext(), $0)";
+}
+
+def MyExternAttr : AttrDef<SirenDialect, "MyExtern", [TypedAttrInterface]> {
+    let parameters = (ins AttributeSelfTypeParameter<"">:$type); // 使用 AttributeSelfTypeParameter 来定义类型参数
+    let mnemonic = "extern";  // 该属性的助记符
+    let assemblyFormat = "";
 }
 
 
