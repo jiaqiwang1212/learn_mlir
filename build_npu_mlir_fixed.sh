@@ -28,24 +28,28 @@ cmake -G "$BUILD_SYSTEM" .. \
 # 根据不同的 target 构建对应的目标
 case "$TARGET" in
     ch-2)
-        cmake --build . --target ch-2-opt mlir-doc
+        cmake --build . --target ch-2-opt ch-2 mlir-doc
         ;;
     ch-3)
-        cmake --build . --target ch-3-opt mlir-doc
+        cmake --build . --target ch-3-opt ch-3 mlir-doc
         ;;
     ch-4)
-        cmake --build . --target ch-4-opt mlir-doc
+        cmake --build . --target ch-4-opt ch-4 mlir-doc
         ;;
     ch-5)
-        cmake --build . --target ch-5-opt mlir-doc
+        cmake --build . --target ch-5-opt ch-5 mlir-doc
         ;;
     ch-6)
         # ch-6 构建 test_traversal 而不是 ch-6-opt
         cmake --build . --target ch6-all-tests mlir-doc
         ;;
+    ch-8)
+        # ch-6 构建 test_traversal 而不是 ch-6-opt
+        cmake --build . --target ch-8-opt ch-8 mlir-doc
+        ;;
     *)
         echo "Error: Unknown target $TARGET"
-        echo "Valid targets: ch-2, ch-3, ch-4, ch-5, ch-6"
+        echo "Valid targets: ch-2, ch-3, ch-4, ch-5, ch-6, ch-8"
         exit 1
         ;;
 esac
