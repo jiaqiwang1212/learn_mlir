@@ -6,7 +6,7 @@
 #   NPUMLIRSirenDialect
 # )
 add_llvm_executable(ch-8-opt npu-opt.cpp)
-target_link_libraries(ch-8-opt PRIVATE NPUMLIRSirenDialect MLIROptLib MLIRTransforms)
+target_link_libraries(ch-8-opt PRIVATE NPUMLIRSirenDialect MLIROptLib MLIRTransforms NPUMLIRSirenTransforms)
 mlir_check_all_link_libraries(ch-8-opt)
 
 install(TARGETS ch-8-opt
