@@ -1,6 +1,16 @@
 #!/bin/bash
 set -e
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+PROJECT_ROOT=$DIR
+THIRDPARTY_LLVM_DIR=$PROJECT_ROOT/externals/llvm-project
+
+BUILD_SYSTEM=Ninja
+LLVM_BUILD_DIR=$THIRDPARTY_LLVM_DIR/build
+LLVM_DIR=$THIRDPARTY_LLVM_DIR/build/lib/cmake/llvm
+MLIR_DIR=$THIRDPARTY_LLVM_DIR/build/lib/cmake/mlir
+INSTALL_PATH=${INSTALL_PATH:-$PROJECT_ROOT/install}
+
 TARGET="$1"  # 接收目标作为命令行参数 (ch-2, ch-3, ..., ch-6)
 
 if [ -z "$TARGET" ]; then
@@ -9,13 +19,8 @@ if [ -z "$TARGET" ]; then
     exit 1
 fi
 
-# 确保环境变量已设置
-if [ -z "$BUILD_SYSTEM" ]; then
-    echo "Error: Environment variables not set. Please run: source env_setup.sh"
-    exit 1
-fi
-
-cd build
+mkdir -p "$PROJECT_ROOT/build"
+cd "$PROJECT_ROOT/build"
 
 # 生成构建文件
 cmake -G "$BUILD_SYSTEM" .. \

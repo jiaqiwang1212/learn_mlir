@@ -8,9 +8,7 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # https://llvm.org/docs/CMake.html
-set(LLVM_DIR /data1/wangjiaqi/workspace/llvm_essentials/externals/llvm-project/build/lib/cmake/llvm)
 find_package(LLVM REQUIRED CONFIG)
-set(MLIR_DIR /data1/wangjiaqi/workspace/llvm_essentials/externals/llvm-project/build/lib/cmake/mlir)
 find_package(MLIR REQUIRED CONFIG)
 
 # For document
