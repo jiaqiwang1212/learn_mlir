@@ -27,6 +27,7 @@ endmacro()
 add_test_executable(test_traversal test_traversal.cpp)
 add_test_executable(test_example test_example.cpp)
 add_test_executable(test_ADT test_ADT.cpp)
+add_test_executable(test_for_yield test_for_yield.cpp)
 
 
 # ===== 创建聚合目标：构建所有测试 =====
