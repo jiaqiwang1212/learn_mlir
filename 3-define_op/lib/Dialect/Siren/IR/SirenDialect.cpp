@@ -7,6 +7,8 @@
 #include "llvm/ADT/TypeSwitch.h"
 #include "llvm/Support/raw_ostream.h"
 
+using namespace mlir::npu_mlir;
+
 #define GET_OP_CLASSES
 #include "npu-mlir/Dialect/Siren/IR/SirenOps.cpp.inc"
 
