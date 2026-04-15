@@ -52,6 +52,8 @@ elseif(${TARGET} STREQUAL "ch-8")
     add_subdirectory(8-define_Pass)
 elseif(${TARGET} STREQUAL "ch-9")
     add_subdirectory(9-dataflow_analysis)
+elseif(${TARGET} STREQUAL "ch-10")
+    add_subdirectory(10-diagnostic_system)
 endif()
 add_subdirectory(llvm)
 
