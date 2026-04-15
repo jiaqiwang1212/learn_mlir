@@ -1,5 +1,56 @@
 # Ch-10: MLIR Diagnostic System
 
+## What is the MLIR Diagnostic System?
+
+MLIR's diagnostic system is the infrastructure for reporting errors, warnings, and informational messages during compilation. It has two sides:
+
+### Production Side — emitting diagnostics
+
+When a pass or op verification finds a problem, it emits a diagnostic:
+
+```cpp
+op->emitError("type mismatch");          // Error severity
+op->emitWarning("unused value");         // Warning severity
+op->emitRemark("value is constant: 42"); // Remark severity (informational)
+```
+
+These return an `InFlightDiagnostic` — a temporary RAII object. You can chain notes onto it before it fires:
+
+```cpp
+op->emitError("conflicting types")
+    .attachNote(other->getLoc()) << "defined here";
+```
+
+The diagnostic doesn't actually dispatch until the `InFlightDiagnostic` destructs at the semicolon.
+
+### Consumption Side — handling diagnostics
+
+Every `MLIRContext` contains a `DiagnosticEngine`. When a diagnostic is emitted, the engine dispatches it through a stack of registered handlers (LIFO order). Each handler returns:
+- `success()` — "I consumed it, stop propagating"
+- `failure()` — "pass it to the next handler"
+
+The default handler (installed by `mlir-opt`) is `SourceMgrDiagnosticHandler`, which prints `filename:line:col: error: msg` to stderr.
+
+You can intercept diagnostics by registering your own handler:
+
+```cpp
+// RAII style (auto-deregisters on scope exit):
+ScopedDiagnosticHandler h(&ctx, myHandlerFn);
+
+// Manual style:
+auto id = ctx.getDiagEngine().registerHandler(myHandlerFn);
+// ... later:
+ctx.getDiagEngine().eraseHandler(id);
+```
+
+### Key design points
+
+1. **`emitError` ≠ pass failure** — it's a severity label. Only `signalPassFailure()` fails the pass manager.
+2. **Notes can't stand alone** — `Note` severity must be attached to a parent diagnostic via `.attachNote()`. The engine asserts if you try to emit a standalone Note (`Diagnostics.h:462`).
+3. **`ScopedDiagnosticHandler` is RAII sugar** over `registerHandler` + `eraseHandler` — the destructor calls `eraseHandler` automatically.
+
+---
+
 本章介绍 MLIR Diagnostic System 的完整生命周期，包括：
 - **生产侧 (Production)**：如何发出诊断（`emitError`、`emitWarning`、`emitRemark`、`attachNote`）
 - **消费侧 (Consumption)**：如何通过自定义 Handler 拦截、格式化和过滤诊断
