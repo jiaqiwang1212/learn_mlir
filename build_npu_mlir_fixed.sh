@@ -49,12 +49,14 @@ case "$TARGET" in
         cmake --build . --target ch6-all-tests mlir-doc
         ;;
     ch-8)
-        # ch-6 构建 test_traversal 而不是 ch-6-opt
         cmake --build . --target ch-8-opt ch-8 mlir-doc
+        ;;
+    ch-9)
+        cmake --build . --target ch-9-opt mlir-doc
         ;;
     *)
         echo "Error: Unknown target $TARGET"
-        echo "Valid targets: ch-2, ch-3, ch-4, ch-5, ch-6, ch-8"
+        echo "Valid targets: ch-2, ch-3, ch-4, ch-5, ch-6, ch-8, ch-9"
         exit 1
         ;;
 esac
