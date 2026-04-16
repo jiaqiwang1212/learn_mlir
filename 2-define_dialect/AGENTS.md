@@ -34,7 +34,7 @@ Chapter 2: Define the minimal Siren dialect skeleton. Introduces the core MLIR p
 
 ### Testing Requirements
 ```bash
-TARGET=ch-2 ./build_npu_mlir_fixed.sh
+./build_npu_mlir_fixed.sh ch-2
 install/bin/ch-2-opt --show-dialects   # should list 'siren'
 ```
 

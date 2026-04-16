@@ -39,11 +39,11 @@ Standalone C++ test executables for chapter 6. Each file is an independent `main
    target_link_libraries(test_myname PRIVATE MLIRSCFDialect MLIRArithDialect ...)
    install(TARGETS test_myname DESTINATION bin/test)
    ```
-3. Build with `TARGET=ch-6 ./build_npu_mlir_fixed.sh`, run from `install/bin/test/test_myname`.
+3. Build with `./build_npu_mlir_fixed.sh ch-6`, run from `install/bin/test/test_myname`.
 
 ### Testing Requirements
 ```bash
-TARGET=ch-6 ./build_npu_mlir_fixed.sh
+./build_npu_mlir_fixed.sh ch-6
 install/bin/test/test_for_yield    # expected: prints result↔yield pairs
 install/bin/test/test_traversal    # expected: prints op walk output
 install/bin/test/test_ADT          # expected: ADT usage demo output

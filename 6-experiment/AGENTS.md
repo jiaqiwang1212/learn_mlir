@@ -42,7 +42,7 @@ Chapter 6: Free-form MLIR experiments beyond dialect definition. This chapter ad
 
 ### Building and Running Tests
 ```bash
-TARGET=ch-6 ./build_npu_mlir_fixed.sh
+./build_npu_mlir_fixed.sh ch-6
 install/bin/test/test_for_yield
 install/bin/test/test_traversal
 install/bin/test/test_ADT

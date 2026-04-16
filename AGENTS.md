@@ -1,4 +1,4 @@
-<!-- Generated: 2026-04-14 | Updated: 2026-04-14 -->
+<!-- Generated: 2026-04-14 | Updated: 2026-04-16 -->
 
 # learn_mlir
 
@@ -28,6 +28,10 @@ A hands-on MLIR learning repository that walks through building an NPU compiler 
 | `6-experiment/` | Ch-6: SCF ForOp/YieldOp experiments, C++ test executables (see `6-experiment/AGENTS.md`) |
 | `7-table_gen/` | Ch-7: TableGen syntax exploration notebook (see `7-table_gen/AGENTS.md`) |
 | `8-define_Pass/` | Ch-8: Pass infrastructure with TestPassOne (see `8-define_Pass/AGENTS.md`) |
+| `9-dataflow_analysis/` | Ch-9: Sparse constant propagation via DataFlowSolver (see `9-dataflow_analysis/AGENTS.md`) |
+| `10-diagnostic_system/` | Ch-10: Diagnostic emission and custom handlers (see `10-diagnostic_system/AGENTS.md`) |
+| `11-pdll/` | Ch-11: PDLL pattern rewriting — fold, strength reduction, DCE (see `11-pdll/AGENTS.md`) |
+| `12-transform_dialect/` | Ch-12: Transform dialect DSL — tile, fuse, loop outline, pass integration (see `12-transform_dialect/AGENTS.md`) |
 | `externals/` | Git submodule: llvm-project @ llvmorg-22.1.0 (do not edit) |
 | `install/` | CMake install prefix — built binaries, libraries, and docs land here |
 | `.claude/` | Claude Code settings and skills |
@@ -37,8 +41,8 @@ A hands-on MLIR learning repository that walks through building an NPU compiler 
 
 ### Building a Chapter
 ```bash
-# Build chapter N (replace N with 2,3,4,5,6,8):
-TARGET=ch-N ./build_npu_mlir_fixed.sh
+# Build chapter N (replace N with 2,3,4,5,6,8,9,10,11,12):
+./build_npu_mlir_fixed.sh ch-N
 
 # Build LLVM/MLIR first if externals/llvm-project is not yet built:
 ./build_llvm.sh

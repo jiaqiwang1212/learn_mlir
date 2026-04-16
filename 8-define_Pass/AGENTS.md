@@ -43,8 +43,8 @@ Chapter 8: Define MLIR transformation passes. Introduces the pass infrastructure
 
 ### Testing Requirements
 ```bash
-TARGET=ch-8 ./build_npu_mlir_fixed.sh
-install/bin/ch-2-opt --test-pass-one test/siren.mlir
+./build_npu_mlir_fixed.sh ch-8
+install/bin/ch-8-opt --test-pass-one test/siren.mlir
 ```
 
 ### Common Patterns

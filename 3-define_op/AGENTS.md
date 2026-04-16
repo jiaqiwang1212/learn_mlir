@@ -43,8 +43,8 @@ Chapter 3: Add operations to the Siren dialect. Introduces `AddOp` and `SubOp` w
 
 ### Testing Requirements
 ```bash
-TARGET=ch-3 ./build_npu_mlir_fixed.sh
-install/bin/ch-2-opt test/siren.mlir   # runs the MLIR test
+./build_npu_mlir_fixed.sh ch-3
+install/bin/ch-3-opt test/siren.mlir   # runs the MLIR test
 ```
 
 ### Common Patterns

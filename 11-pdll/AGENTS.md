@@ -1,3 +1,6 @@
+<!-- Parent: ../AGENTS.md -->
+<!-- Generated: 2026-04-16 | Updated: 2026-04-16 -->
+
 # Ch-11 PDLL — Agent Guide
 
 ## Purpose

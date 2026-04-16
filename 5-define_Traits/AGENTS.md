@@ -41,7 +41,7 @@ Chapter 5: Add op traits to the Siren dialect. Introduces `RequireTwoOperandsOne
 
 ### Testing Requirements
 ```bash
-TARGET=ch-5 ./build_npu_mlir_fixed.sh
+./build_npu_mlir_fixed.sh ch-5
 ```
 
 ### Common Patterns

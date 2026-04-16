@@ -42,7 +42,7 @@ Chapter 4: Attach MLIR interfaces to the Siren ops. Introduces `NpuOpInterface` 
 
 ### Testing Requirements
 ```bash
-TARGET=ch-4 ./build_npu_mlir_fixed.sh
+./build_npu_mlir_fixed.sh ch-4
 ```
 
 ### Common Patterns
