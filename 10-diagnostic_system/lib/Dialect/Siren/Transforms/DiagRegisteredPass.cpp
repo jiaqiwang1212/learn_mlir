@@ -47,8 +47,8 @@ public:
     // wraps with RAII (see mlir/IR/Diagnostics.h:536-542).
     // -----------------------------------------------------------------------
     DiagnosticEngine &engine = getContext().getDiagEngine();
-    DiagnosticEngine::HandlerID id =
-        engine.registerHandler(CustomDiagnosticHandler{/*suppressWarnings=*/false});
+    DiagnosticEngine::HandlerID id = engine.registerHandler(
+        CustomDiagnosticHandler{/*suppressWarnings=*/false});
 
     // -----------------------------------------------------------------------
     // Step 2: Emit all 4 severity levels from the first func.return op.
@@ -61,13 +61,15 @@ public:
     func.walk([&](func::ReturnOp op) -> WalkResult {
       // Form A: op->emitError with an attached Note.
       // NOTE: engine.emit(loc, DiagnosticSeverity::Note) is FORBIDDEN —
-      // mlir/IR/Diagnostics.h:462 asserts "notes should not be emitted directly".
-      // Notes must be attached via .attachNote() on a parent InFlightDiagnostic.
-      op->emitError("registered: via op->emitError")
-          .attachNote(op->getLoc()) << "registered: direct-engine note";
+      // mlir/IR/Diagnostics.h:462 asserts "notes should not be emitted
+      // directly". Notes must be attached via .attachNote() on a parent
+      // InFlightDiagnostic.
+      op->emitError("registered: via op->emitError").attachNote(op->getLoc())
+          << "registered: direct-engine note";
 
       // Form B: free-function mlir::emitWarning(loc, msg)
-      mlir::emitWarning(op->getLoc(), "registered: via mlir::emitWarning(loc, msg)");
+      mlir::emitWarning(op->getLoc(),
+                        "registered: via mlir::emitWarning(loc, msg)");
 
       // Form B: free-function mlir::emitRemark(loc, msg)
       mlir::emitRemark(op->getLoc(), "registered: via free function form");
