@@ -54,6 +54,8 @@ elseif(${TARGET} STREQUAL "ch-9")
     add_subdirectory(9-dataflow_analysis)
 elseif(${TARGET} STREQUAL "ch-10")
     add_subdirectory(10-diagnostic_system)
+elseif(${TARGET} STREQUAL "ch-11")
+    add_subdirectory(11-pdll)
 endif()
 add_subdirectory(llvm)
 

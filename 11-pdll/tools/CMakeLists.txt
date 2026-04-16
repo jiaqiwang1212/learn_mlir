@@ -1,0 +1,3 @@
+add_subdirectory(pdll_fold_demo)
+add_subdirectory(pdll_strength_demo)
+add_subdirectory(pdll_dce_demo)

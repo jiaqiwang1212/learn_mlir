@@ -1,0 +1,25 @@
+// Demo 2: Strength-reduce muli(x, constant 2) -> addi(x, x).
+//
+// Demonstrates PDLL native C++ constraint [{ }] blocks:
+//   - Constraint isConstantTwo: embeds C++ code to check attribute value
+//   - Pattern StrengthReduceMulByTwo: captures operands, applies constraint,
+//     replaces muli with addi using the same operand twice
+//
+// The [{ }] syntax allows arbitrary C++ predicates at match time.
+// The return type must be mlir::LogicalResult (success/failure).
+
+Constraint isConstantTwo(op: Op)[{
+  // op is mlir::Operation* — use directly, no .get() needed
+  auto constOp = llvm::dyn_cast<mlir::arith::ConstantIntOp>(op);
+  if (!constOp)
+    return mlir::failure();
+  return mlir::success(constOp.value() == 2);
+}];
+
+Pattern StrengthReduceMulByTwo {
+  let multiplier = op<arith.constant>;
+  isConstantTwo(multiplier);
+  let input : Value;
+  let mul = op<arith.muli>(input, multiplier.0);
+  replace mul with op<arith.addi>(input, input);
+}

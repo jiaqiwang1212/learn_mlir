@@ -1,0 +1,21 @@
+// Demo 3: Erase dead arith.constant ops via PDLL erase.
+//
+// Demonstrates:
+//   - Native C++ constraint [{ }] for a correctness-critical check
+//   - The erase action (removes the matched op from the IR)
+//   - Why use_empty() must be guarded: RewriterBase::eraseOp() asserts
+//     use_empty() internally — the constraint makes the guard explicit.
+//
+// The driver (pdll_dce_demo.cpp) constructs a function with two constants
+// whose results are never used (zero-operand return), so IsUnused fires on
+// both and they are erased.
+
+Constraint IsUnused(op: Op)[{
+  return mlir::success(op->use_empty());
+}];
+
+Pattern EraseDeadConstant {
+  let dead = op<arith.constant>;
+  IsUnused(dead);
+  erase dead;
+}

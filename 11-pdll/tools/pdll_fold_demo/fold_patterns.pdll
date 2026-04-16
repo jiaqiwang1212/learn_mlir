@@ -1,0 +1,17 @@
+// Demo 1: Match addi(constant, constant) and replace with the LHS constant.
+//
+// This demonstrates PDLL structural pattern matching:
+//   - op<arith.addi> matches an arith.addi operation
+//   - op<arith.constant> matches operands that come from constant ops
+//   - replace ... with ... rewrites matched ops
+//
+// Note: This replaces the addi with its LHS operand (simplified fold).
+// A production implementation would use a native Rewrite block [{ }] to
+// compute the actual sum — see pdll_strength_demo for native C++ escapes.
+
+Pattern FoldConstantAdd {
+  let lhs = op<arith.constant>;
+  let rhs = op<arith.constant>;
+  let add = op<arith.addi>(lhs.0, rhs.0);
+  replace add with lhs.0;
+}

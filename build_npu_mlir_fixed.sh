@@ -15,7 +15,7 @@ TARGET="$1"  # 接收目标作为命令行参数 (ch-2, ch-3, ..., ch-6)
 
 if [ -z "$TARGET" ]; then
     echo "Error: No target specified."
-    echo "Usage: $0 <ch-2|ch-3|ch-4|ch-5|ch-6|ch-8|ch-9|ch-10>"
+    echo "Usage: $0 <ch-2|ch-3|ch-4|ch-5|ch-6|ch-8|ch-9|ch-10|ch-11>"
     exit 1
 fi
 
@@ -57,9 +57,12 @@ case "$TARGET" in
     ch-10)
         cmake --build . --target ch-10-opt mlir-doc
         ;;
+    ch-11)
+        cmake --build . --target ch11-pdll-fold-demo ch11-pdll-strength-demo ch11-pdll-dce-demo mlir-doc
+        ;;
     *)
         echo "Error: Unknown target $TARGET"
-        echo "Valid targets: ch-2, ch-3, ch-4, ch-5, ch-6, ch-8, ch-9, ch-10"
+        echo "Valid targets: ch-2, ch-3, ch-4, ch-5, ch-6, ch-8, ch-9, ch-10, ch-11"
         exit 1
         ;;
 esac
