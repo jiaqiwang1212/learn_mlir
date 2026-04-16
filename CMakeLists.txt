@@ -56,6 +56,8 @@ elseif(${TARGET} STREQUAL "ch-10")
     add_subdirectory(10-diagnostic_system)
 elseif(${TARGET} STREQUAL "ch-11")
     add_subdirectory(11-pdll)
+elseif(${TARGET} STREQUAL "ch-12")
+    add_subdirectory(12-transform_dialect)
 endif()
 add_subdirectory(llvm)
 

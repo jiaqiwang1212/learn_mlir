@@ -60,9 +60,12 @@ case "$TARGET" in
     ch-11)
         cmake --build . --target ch11-pdll-fold-demo ch11-pdll-strength-demo ch11-pdll-dce-demo mlir-doc
         ;;
+    ch-12)
+        cmake --build . --target ch12-test-transform-demo mlir-doc
+        ;;
     *)
         echo "Error: Unknown target $TARGET"
-        echo "Valid targets: ch-2, ch-3, ch-4, ch-5, ch-6, ch-8, ch-9, ch-10, ch-11"
+        echo "Valid targets: ch-2, ch-3, ch-4, ch-5, ch-6, ch-8, ch-9, ch-10, ch-11, ch-12"
         exit 1
         ;;
 esac
