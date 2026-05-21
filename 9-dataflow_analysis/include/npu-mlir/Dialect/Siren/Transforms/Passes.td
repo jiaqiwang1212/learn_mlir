@@ -20,4 +20,28 @@ def ConstantPropAnalysis : Pass<"constant-prop-analysis", "mlir::func::FuncOp"> 
                            "mlir::arith::ArithDialect"];
 }
 
+// A custom forward data-flow analysis that tracks minimum and maximum possible
+// integer values for every SSA result, then emits remarks with the inferred
+// range.  Transfer functions cover arith.constant, addi, muli, and remui.
+def RangeAnalysis : Pass<"range-analysis", "mlir::func::FuncOp"> {
+  let summary = "Integer range analysis (emits remarks with inferred value ranges)";
+  let description = [{
+    Runs a custom SparseForwardDataFlowAnalysis<Lattice<RangeLatticeValue>>
+    on a func.func body.  For every integer-typed result whose range is
+    provably tighter than [INT64_MIN, INT64_MAX], emits a remark:
+      remark: value is in range: [lo, hi]
+
+    Transfer functions:
+      arith.constant c    -> [c, c]
+      [a,b] + [c,d]       -> [a+c, b+d]
+      [a,b] * [c,d]       -> [min(corners), max(corners)]
+      x remui N (N const) -> [0, N-1]
+
+    Teaches how to implement a fully custom dataflow analysis using the
+    SparseForwardDataFlowAnalysis template.  The IR is never modified.
+  }];
+  let dependentDialects = ["mlir::func::FuncDialect",
+                           "mlir::arith::ArithDialect"];
+}
+
 #endif // NPU_MLIR_SIREN_DIALECT_PASSES

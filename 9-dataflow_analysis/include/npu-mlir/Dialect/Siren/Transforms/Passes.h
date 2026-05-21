@@ -11,6 +11,7 @@
 
 #include "mlir/Pass/Pass.h"
 #include "npu-mlir/Dialect/Siren/Transforms/ConstantPropAnalysis.h"
+#include "npu-mlir/Dialect/Siren/Transforms/RangeAnalysis.h"
 
 namespace mlir {
 namespace npu_mlir {
