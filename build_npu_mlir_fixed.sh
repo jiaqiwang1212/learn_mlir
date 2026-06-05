@@ -63,9 +63,12 @@ case "$TARGET" in
     ch-12)
         cmake --build . --target ch12-test-transform-demo mlir-doc
         ;;
+    ch-13)
+        cmake --build . --target ch-13-opt construct-resource mlir-doc
+        ;;
     *)
         echo "Error: Unknown target $TARGET"
-        echo "Valid targets: ch-2, ch-3, ch-4, ch-5, ch-6, ch-8, ch-9, ch-10, ch-11, ch-12"
+        echo "Valid targets: ch-2, ch-3, ch-4, ch-5, ch-6, ch-8, ch-9, ch-10, ch-11, ch-12, ch-13"
         exit 1
         ;;
 esac

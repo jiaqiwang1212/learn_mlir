@@ -58,6 +58,8 @@ elseif(${TARGET} STREQUAL "ch-11")
     add_subdirectory(11-pdll)
 elseif(${TARGET} STREQUAL "ch-12")
     add_subdirectory(12-transform_dialect)
+elseif(${TARGET} STREQUAL "ch-13")
+    add_subdirectory(13-dialect_resources)
 endif()
 add_subdirectory(llvm)
 
